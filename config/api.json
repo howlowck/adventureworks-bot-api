@@ -1,0 +1,150 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Adventureworks Bot API",
+        "description": "Adventureworks Bot makes your life easier",
+        "version": "0.1.0"
+    },
+    "host": "adventureworks-bot-api.azurewebsites.net",
+    "schemes": [
+        "https"
+    ],
+    "basePath": "/",
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/orders": {
+            "get": {
+                "summary": "Orders",
+                "description": "The /orders endpoint retrieves all the orders given the filter for status and email of the user\n",
+                "parameters": [
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter the status of the orders",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Email of the user",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An array of orders",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/Order"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/orders/{orderNumber}": {
+            "get": {
+                "summary": "Get an order",
+                "description": "When given the order number, the API will return the individual order.\n",
+                "parameters": [
+                    {
+                        "name": "orderNumber",
+                        "in": "path",
+                        "description": "The order number",
+                        "required": true,
+                        "type": "number",
+                        "format": "double"
+                    }
+                ],
+                "tags": [
+                    "Orders"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "one Order",
+                        "schema": {
+                            "$ref": "#/definitions/Order"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Order": {
+            "type": "object",
+            "properties": {
+                "order_number": {
+                    "type": "string",
+                    "description": "Unique identifier representing a specific order"
+                },
+                "customer_number": {
+                    "type": "string",
+                    "description": "Customer Number"
+                },
+                "order_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date of the Estimate Completion Time"
+                },
+                "shipment_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Date of the shipment"
+                },
+                "freight": {
+                    "type": "number",
+                    "format":"float",
+                    "description": "Cost of the Freight"
+                },
+                "tax": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Cost of tax"
+                },
+                "total": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Cost total"
+                },
+                "subtotal": {
+                    "type": "number",
+                    "format": "float",
+                    "description": "Cost of all the items"
+                }
+            }
+        },
+        "Error": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer",
+                    "format": "int32"
+                },
+                "message": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
