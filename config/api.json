@@ -20,17 +20,17 @@
                 "description": "The /orders endpoint retrieves all the orders given the filter for status and email of the user\n",
                 "parameters": [
                     {
-                        "name": "status",
+                        "name": "account",
                         "in": "query",
-                        "description": "Filter the status of the orders",
-                        "required": true,
+                        "description": "Account Number",
+                        "required": false,
                         "type": "string"
                     },
                     {
-                        "name": "email",
+                        "name": "orderdate",
                         "in": "query",
-                        "description": "Email of the user",
-                        "required": true,
+                        "description": "Order Date in YYYY-MM-DD Ex: 2017-01-29",
+                        "required": false,
                         "type": "string"
                     }
                 ],
@@ -56,13 +56,13 @@
                 }
             }
         },
-        "/orders/{orderNumber}": {
+        "/orders/{id}": {
             "get": {
                 "summary": "Get an order",
                 "description": "When given the order number, the API will return the individual order.\n",
                 "parameters": [
                     {
-                        "name": "orderNumber",
+                        "name": "id",
                         "in": "path",
                         "description": "The order number",
                         "required": true,
@@ -98,19 +98,24 @@
                     "type": "string",
                     "description": "Unique identifier representing a specific order"
                 },
-                "customer_number": {
+                "account_number": {
                     "type": "string",
-                    "description": "Customer Number"
+                    "description": "Account Number"
                 },
                 "order_date": {
                     "type": "string",
                     "format": "date",
                     "description": "Date of the Estimate Completion Time"
                 },
-                "shipment_date": {
+                "estimated_shipment_date": {
                     "type": "string",
                     "format": "date",
-                    "description": "Date of the shipment"
+                    "description": "Estimated Date of the shipment"
+                },
+                "actual_shipment_date": {
+                    "type": "string",
+                    "format": "date",
+                    "description": "Actual Date of the shipment"
                 },
                 "freight": {
                     "type": "number",
@@ -131,6 +136,10 @@
                     "type": "number",
                     "format": "float",
                     "description": "Cost of all the items"
+                },
+                "status": {
+                    "type": "string",
+                    "description": "Status of the order"
                 }
             }
         },

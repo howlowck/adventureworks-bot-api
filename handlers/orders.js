@@ -2,8 +2,8 @@ var repository = require('../lib/orderRepository')
 
 module.exports = {
   get: (req, res) => {
-    const {status, email} = req.query
-    repository.getAll({status, email}, (data) => {
+    const {account, orderdate} = req.query
+    repository.getAll({account, orderdate}, (data) => {
       res.json(data)
     })
   }
