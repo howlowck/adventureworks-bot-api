@@ -5,7 +5,7 @@
         "description": "Adventureworks Bot makes your life easier",
         "version": "0.1.0"
     },
-    "host": "adventureworks-bot-api.azurewebsites.net",
+    "host": "adventureworks-api.azurewebsites.net",
     "schemes": [
         "https"
     ],
